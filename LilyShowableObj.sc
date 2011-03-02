@@ -1,5 +1,5 @@
 
-LilyShowableObj {
+LilyShowableObj : LilyObj {
 	
 	var <>fileName = "~/Desktop/LilyCollider";
 	var <>pdfViewer = "okular"; // "evince"
@@ -15,23 +15,32 @@ LilyShowableObj {
 		var file;
 		
 		file = File(this.fileName.standardizePath ++ ".ly","w");
-		//         file.write(this.header ++ "\n");
+//      file.write(this.header ++ "\n");
 		file.write(this.musicString);
 		file.close;
 	}
+
 	
+    show {
+
+        (
+            this.pdfViewer ++ " " ++ this.fileName.standardizePath ++ ".pdf"
+        ).unixCmd;
+    }
+
 	
 	plot {
 		
 		fork {
-			
 			this.write;
 			0.1.wait;
-			
-			( "lilypond -o " ++ this.fileName.standardizePath ++ " " ++ this.fileName.standardizePath ++ ".ly"		).unixCmd { this.show};
-			
+			(
+                "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
+                this.fileName.standardizePath ++ ".ly"  
+            ).unixCmd { this.show};
 		}
 	}
+
 	
 	edit {
 		this.write;
@@ -41,11 +50,6 @@ LilyShowableObj {
 	}
 	
 	
-	show {
-		
-		(
-			this.pdfViewer ++ " " ++ this.fileName.standardizePath ++ ".pdf"
-		).unixCmd;
-	}
-	
+
+
 }
