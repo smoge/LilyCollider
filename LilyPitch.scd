@@ -1,6 +1,13 @@
 // Pitch representation with Lilypond suport
  
-a = LilyPitch(13.5).plot
+a = LilyPitch(13.5)
+a.plot
+a.template="doc"
+a.template="minimal"
+a.header
+a.templateList
+a.templateFile
+a.template
 
 a.musicString
 a.string

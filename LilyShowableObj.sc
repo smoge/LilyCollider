@@ -5,6 +5,7 @@ LilyShowableObj : LilyObj {
 	var <>pdfViewer = "okular"; // "evince"
 	var <>textEditor = "frescobaldi"; // "jedit"
 	var <>templatesFolder = "~/share/SuperCollider/Extensions/Lily/templates";
+    var <>template = "doc";
 
 
 	*new {
@@ -17,12 +18,25 @@ LilyShowableObj : LilyObj {
         ^("{\n" ++  this.string ++ "\n}\n").asString;
     }
 
+    templateFile {
+        ^(this.templatesFolder ++ "/" ++ this.template ++ ".ly").standardizePath
+    }
+    
+    header {
+        var file, content;
+     
+        file = File(this.templateFile,"r");
+        content = file.readAllString;
+        file.close;
+        ^content;
+    }
    
 	write {
 		var file;
 		
 		file = File(this.fileName.standardizePath ++ ".ly","w");
 //      file.write(this.header ++ "\n");
+        file.write(this.header);
 		file.write(this.musicString);
 		file.close;
 	}
