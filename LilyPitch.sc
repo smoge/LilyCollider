@@ -94,12 +94,6 @@ LilyPitch : LilyShowableObj {
 	}
 
 
-	musicString {
-		// same as .string but with curly brackets
-		^("{ " ++  this.string ++ "}").asString;
-	}
-
-
 	== { arg otherNote;
 
 		if(

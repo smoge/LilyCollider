@@ -3,20 +3,13 @@ LilyObj {
 
 
     classvar <pitchList, <octaveList, <pitchDict, <octDict;
-    classvar <afterNoteDict, <beforeNoteDict, templateList;
+    classvar <afterNoteDict, <beforeNoteDict;
     
     *initClass {
 
         pitchList = ["c","cis","d","dis","e","f","fis", "g", "gis","a", "ais", "b"];
 
         octaveList =  [",,,,",",,,",",,",",", " ","'","''","'''", "''''"];
-
-        templateList = [
-            "compact-rhythmic",
-            
-
-            
-        ];
 
 
         pitchDict = Dictionary[

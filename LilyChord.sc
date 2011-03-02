@@ -76,12 +76,6 @@ LilyChord : LilyShowableObj {
 		^musicStringOut ++ ">";
 	}
 
-	musicString {
-		// same as .string, but with curly brackets
-		^"{ " ++  this.string ++ "}"
-	}
-
-
 	// NOTE
 	// these are methods to manipulate chords as Sets
 

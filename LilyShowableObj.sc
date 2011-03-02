@@ -11,6 +11,12 @@ LilyShowableObj : LilyObj {
 		^super.new;
 	}
 
+
+    musicString {
+        // just add a pair of curly brackets
+        ^("{\n" ++  this.string ++ "\n}\n").asString;
+    }
+
    
 	write {
 		var file;
