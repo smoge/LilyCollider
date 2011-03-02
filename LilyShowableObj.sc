@@ -4,13 +4,14 @@ LilyShowableObj : LilyObj {
 	var <>fileName = "~/Desktop/LilyCollider";
 	var <>pdfViewer = "okular"; // "evince"
 	var <>textEditor = "frescobaldi"; // "jedit"
-	
-	
+	var <>templatesFolder = "~/share/SuperCollider/Extensions/Lily/templates";
+
+
 	*new {
 		^super.new;
 	}
-	
-	
+
+   
 	write {
 		var file;
 		
@@ -20,7 +21,18 @@ LilyShowableObj : LilyObj {
 		file.close;
 	}
 
-	
+    templatePathList {
+
+        ^(templatesFolder ++ "/*").pathMatch
+
+    }
+    
+	templateList {
+        
+        ^(this.templatePathList.collect {|i| i.basename})
+        
+    }
+    
     show {
 
         (

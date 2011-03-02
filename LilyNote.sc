@@ -121,9 +121,7 @@ LilyNote : LilyShowableObj {
 				thisCps + (thisCps * i))
 		});
 		// returns a PitchSequence:
-		^PitchSequence(outputArray.cpsmidi.round(roundNotes) - 60)
+		//^PitchSequence(outputArray.cpsmidi.round(roundNotes) - 60)
 	}
-
-
 
 }
