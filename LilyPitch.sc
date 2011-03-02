@@ -1,5 +1,5 @@
 
-LilyNote : LilyShowableObj {
+LilyPitch : LilyShowableObj {
 
 	
 	var <notenumber, <>duration;

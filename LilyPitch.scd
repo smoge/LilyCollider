@@ -1,6 +1,6 @@
 // Pitch representation with Lilypond suport
  
-a = LilyNote(13.5).plot
+a = LilyPitch(13.5).plot
 
 a.musicString
 a.string
@@ -16,7 +16,7 @@ a.lily = "cis'"
 a.string
 a.notenumber
 
-a = LilyNote.new(30);
+a = LilyPitch.new(30);
 a.filename = "teste2";
 a.musicString;
 a.ly;
@@ -25,7 +25,7 @@ a.edit;
 
 // Harmonic Series
  
-a = LilyNote(-25)
+a = LilyPitch(-25)
 a = a.makeHarmonicSeries
 a.notenumber
 a.ly
@@ -33,7 +33,7 @@ a.openPdf
 
 // Articulations
 
-a = LilyNote(5)
+a = LilyPitch(5)
 a.putAfterNote("-.")
 a.afterNote
 a.putAfterNote("->")
