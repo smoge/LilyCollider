@@ -94,14 +94,14 @@ LilyPitch : LilyShowableObj {
 	}
 
 
-	== { arg otherNote;
+	== { arg otherPitch;
 
 		if(
-			otherNote.class != Note,
-			{"This is not a Note Object".warn}
+            otherPitch.isKindOf(LilyPitch),
+            {^this.notenumber == otherPitch.notenumber},
+			{"This is not a LilyPitch Object".error}
 		);
-		
-		^this.notenumber == otherNote.notenumber;
+        
 	}
 	
 

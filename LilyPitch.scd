@@ -22,8 +22,28 @@ a.string
 a.lily = "cis'"
 a.string
 a.notenumber
+Help.gui
 
 a = LilyPitch.new(30);
+b = LilyPitch.new(31);
+
+d = LilyChord()
+d.put(a)
+d.includes(30)
+
+c = LilyPitch.new(33);
+b = LilyChord(a)
+b.put([1, 2, 4])
+b.notenumber
+b.includes(33)
+b.includes(LilyPitch(33))
+
+
+
+b.noteArray
+b.put(a)
+b.plot
+
 a.filename = "teste2";
 a.musicString;
 a.ly;

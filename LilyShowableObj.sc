@@ -2,10 +2,14 @@
 LilyShowableObj : LilyObj {
 	
 	var <>fileName = "~/Desktop/LilyCollider";
-	var <>pdfViewer = "okular"; // "evince"
-	var <>textEditor = "frescobaldi"; // "jedit"
-	var <>templatesFolder = "~/share/SuperCollider/Extensions/Lily/templates";
+	var <>pdfViewer = "xpdf"; // okular / evince
+	var <>textEditor = "frescobaldi"; // emacsclient / jedit
+	var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider/templates";
     var <>template = "doc";
+
+/*
+ * NOTE try later smaller png preview images with sxiv as a viewer 
+ */
 
 
 	*new {

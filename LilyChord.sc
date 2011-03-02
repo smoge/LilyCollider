@@ -1,47 +1,68 @@
- /* 
-	LilyChord.sc
-	
-	c = LilyChord.new([10, 11])
-	c.templateList
-	c.notenumbe
-	c.noteArray
-	c.qt
-	c.stringArray
-	c.string
-	c.musicString
-	c.intervals
-	c.write
-	c.plot
-	c.edit
-
-    -- Set Operations --
-	a = LilyChord.New([1, 2, 3])
-	b = LilyChord.New([2, 3, 4])
-	c = a - b
-	c.notenumber
-*/ 
 
 LilyChord : LilyShowableObj {
 
-	var <>notenumber, <>noteArray;
+	
+	var <>noteArray;
+	
 
-	*new {|noteList|
+	*new { arg noteList;
 		^super.new.init(noteList);
 	}
-
-
-	init { |noteList|
-
-		// TODO:
-		// it should be possible to initialize Chord
-		// with a Array of Note Objects
-		notenumber = Array.new;
+	
+	
+	init { arg firstStuff;
+		
 		noteArray = Array.new;
-		noteList.do({arg thisNote;
-			notenumber = notenumber.add(thisNote);
-			noteArray = noteArray.add(LilyNote.new(thisNote));
+		this.put(firstStuff);
+	}
+
+
+	notenumber {
+
+		^noteArray.collect({ arg thisEvent;
+			thisEvent.notenumber
 		})
 	}
+
+
+	put { arg putThis;
+
+		if(this.includes(putThis).not, {
+	
+			if(putThis.isKindOf(Number), {
+				noteArray = noteArray.add(LilyPitch.new(putThis))
+			});
+			
+			if(putThis.isKindOf(LilyPitch), {
+				noteArray = noteArray.add(putThis)
+			});
+			
+			if(putThis.isKindOf(Array), {
+				this.putArray(putThis)
+			});
+		});
+	}
+
+
+	putArray { arg putThis;
+		
+		putThis.do { arg thisOne;
+			this.put(thisOne);
+		};
+
+	}	
+
+
+    includes { arg testPitch;
+
+		var thisTest;
+
+		if(testPitch.isKindOf(LilyPitch), 
+			{thisTest = testPitch.notenumber},
+			{thisTest = testPitch}
+		);
+		^this.notenumber.includes(thisTest)
+    }
 
 
     qt {
@@ -60,47 +81,54 @@ LilyChord : LilyShowableObj {
 
 
     stringArray {
-        ^this.noteArray.collect({|i| i.pitch ++ i.octave;})
+        
+		^this.noteArray.collect({|i| i.pitch ++ i.octave;})
     }
 
 
     string {
-        // same as .stringArray,
-        // but puts everything in one single String
-        // with < > (LilyPond synthax)
+		
 		var musicStringOut;
+		
 		musicStringOut = "< ";
 		this.stringArray.do({|i|
 			musicStringOut = musicStringOut ++ i ++ " "
 		});
+		
 		^musicStringOut ++ ">";
 	}
 
-	// NOTE
-	// these are methods to manipulate chords as Sets
 
-	- { | otherChord |
+	////////////////////////////////////////////////////
+    // these are methods to manipulate chords as Sets //
+    ////////////////////////////////////////////////////
+
+
+	- { arg otherChord;
 
 		^LilyChord(this.notenumber.asSet - otherChord.notenumber.asSet)
 	}
 
 
-	-- { | otherChord |
+	-- { arg otherChord;
+
 		^LilyChord(this.notenumber.asSet -- otherChord.notenumber.asSet)
 	}
 
 
-	| { | otherChord |
+	| { arg otherChord;
+
 		^LilyChord(this.notenumber.asSet | otherChord.notenumber.asSet)
 	}
 
 
-	& { | otherChord |
-		^LilyChord(this.notenumber.asSet & otherChord.notenumber.asSet)
-	
-    }
+	& { arg otherChord;
 
-	isSubsetOf { | otherChord |
+		^LilyChord(this.notenumber.asSet & otherChord.notenumber.asSet)	
+    }
+	
+
+	isSubsetOf { arg otherChord;
 
 		^LilyChord(this.notenumber.asSet.isSubsetOf(otherChord.notenumber.asSet))
 	}
