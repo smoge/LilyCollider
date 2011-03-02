@@ -30,8 +30,23 @@ a.ly;
 a.openPdf;
 a.edit;
 
+// Trying LilyPitchSeq: sequence of Pitches and/or Chords:
+
+a = LilyPitch.new(30);
+a.string
+b = LilyPitchSeq(a)
+b.put(a)
+b.eventArray
+b.string
+b.plot
+b.qt
+b.musicString
+b.eventList
+b.put(2)
+
 // Harmonic Series
- 
+
+ true or: false
 a = LilyPitch(-25)
 a = a.makeHarmonicSeries
 a.notenumber
