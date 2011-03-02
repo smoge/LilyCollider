@@ -1,14 +1,15 @@
-LilyNote {
+
+LilyNote : LilyShowableObj {
 
 	classvar <pitchList, <octaveList, <pitchDict, <octDict;
 	classvar <afterNoteDict, <beforeNoteDict;
-
+	
+	var <>fileName = "~/Desktop/LilyCollider";
+	var <>pdfViewer = "okular";
+	var <>textEditor = "frescobaldi"; // "jedit"
+	
 	var <notenumber, <>duration/*, qt*/;
 	var <pitch, <octave, <artic, <>afterNote, <>beforeNote;
-
-    var <>fileName = "~/Desktop/LilyCollider";
-    var <>pdfViewer = "okular";
-    var <>textEditor = "frescobaldi"; // "jedit"
     
 	*new { arg notenumber;
 		^super.new.init(notenumber);
@@ -24,7 +25,6 @@ LilyNote {
 		^(notenumber.frac.round(0.5) == (0.5))
  	}
 
-/*set Note with number (c' = 0)*/
 
 	notenumber_ { arg newnotenumber;
 		var index, octIndex, notenumberFloor, noteNumberFloor;
@@ -131,98 +131,65 @@ LilyNote {
 		^PitchSequence(outputArray.cpsmidi.round(roundNotes) - 60)
 	}
 
-
-    write {
-        var file;
-
-        file = File(this.fileName.standardizePath ++ ".ly","w");
-//         file.write(this.header ++ "\n");
-        file.write(this.musicString);
-        file.close;
-    }
-    
-
-    ly {
-        this.write;     
-        (
-            "lilypond " ++ this.fileName ++ ".ly "
-        ).unixCmd;
-    }
-    
-    edit {
-        this.write;     
-        (
-            this.textEditor ++ " " ++ this.fileName.standardizePath ++ ".ly"
-        ).unixCmd;      
-    }
-    
-
-	openPdf {
-
-        (
-            this.pdfViewer ++ " " ++ this.fileName.standardizePath ++ ".pdf" 
-        ).unixCmd;  
-	}
-
-	*initClass {
-		// default LilyPond names...
-		// this is the dutch default names
-		pitchList = ["c","cis","d","dis","e","f","fis", "g", "gis","a", "ais", "b"];
-		octaveList =  [",,,,",",,,",",,",",", " ","'","''","'''", "''''"];
-		pitchDict = Dictionary[
-			"c" -> 0,
-			"cih" -> 0.5,
-			"cis" -> 1,
-			"des" -> 1,
-			"cisih" -> 1.5,
-			"deh" -> 1.5,
-			"d" -> 2,
-			"dih" -> 2.5,
-			"eeseh" -> 2.5,
-			"dis" -> 3,
-			"ees" -> 3,
-			"disih" -> 3.5,
-			"eeh" -> 3.5,
-			"e" -> 4,
-			"eis" -> 4.5,
-			"feh" -> 4.5,
-			"f" -> 5,
-			"fih" -> 5.5,
-			"geseh" -> 5.5,
-			"fis" -> 6,
-			"ges" -> 6,
-			"fisih" -> 6.5,
-			"geh" -> 6.5,
-			"g" -> 7,
-			"gih" -> 7.5,
-			"aeseh" -> 7.5,
-			"gis" -> 8,
-			"aes" -> 8,
-			"gisih" -> 8.5,
-			"aeh" -> 8.5,
-			"a" -> 9,
-			"aih" -> 9.5,
-			"beseh" -> 9.5,
-			"ais" -> 10,
-			"bes" -> 10,
-			"aisih" -> 10.5,
-			"beh" -> 10.5,
-			"b" -> 11,
-			"bih" -> 11.5,
-			"ceh" -> 11.5
-		];
-
-		octDict = Dictionary[
-			",,," -> -4,
-			",," -> -3,
-			"," -> -2,
-			"" -> -1,
-			"'" -> 0,
-			"''" -> 1,
-			"'''" -> 2,
-			"''''" -> 3
-		];
-
-	}
+*initClass {
+	// default LilyPond names...
+	// this is the dutch default names
+	pitchList = ["c","cis","d","dis","e","f","fis", "g", "gis","a", "ais", "b"];
+	octaveList =  [",,,,",",,,",",,",",", " ","'","''","'''", "''''"];
+	pitchDict = Dictionary[
+	"c" -> 0,
+	"cih" -> 0.5,
+	"cis" -> 1,
+	"des" -> 1,
+	"cisih" -> 1.5,
+	"deh" -> 1.5,
+	"d" -> 2,
+	"dih" -> 2.5,
+	"eeseh" -> 2.5,
+	"dis" -> 3,
+	"ees" -> 3,
+	"disih" -> 3.5,
+	"eeh" -> 3.5,
+	"e" -> 4,
+	"eis" -> 4.5,
+	"feh" -> 4.5,
+	"f" -> 5,
+	"fih" -> 5.5,
+	"geseh" -> 5.5,
+	"fis" -> 6,
+	"ges" -> 6,
+	"fisih" -> 6.5,
+	"geh" -> 6.5,
+	"g" -> 7,
+	"gih" -> 7.5,
+	"aeseh" -> 7.5,
+	"gis" -> 8,
+	"aes" -> 8,
+	"gisih" -> 8.5,
+	"aeh" -> 8.5,
+	"a" -> 9,
+	"aih" -> 9.5,
+	"beseh" -> 9.5,
+	"ais" -> 10,
+	"bes" -> 10,
+	"aisih" -> 10.5,
+	"beh" -> 10.5,
+	"b" -> 11,
+	"bih" -> 11.5,
+	"ceh" -> 11.5
+	];
+	
+	octDict = Dictionary[
+	",,," -> -4,
+	",," -> -3,
+	"," -> -2,
+	"" -> -1,
+	"'" -> 0,
+	"''" -> 1,
+	"'''" -> 2,
+	"''''" -> 3
+	];
+	
+}
 
 }

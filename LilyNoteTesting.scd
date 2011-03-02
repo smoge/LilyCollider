@@ -1,6 +1,8 @@
 // Pitch representation with Lilypond suport
  
-a = LilyNote.new(-31.5)
+a = LilyNote(13.5).plot
+
+a.musicString
 a.string
 a.pitch
 a.octave
