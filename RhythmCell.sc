@@ -2,17 +2,18 @@
 RhythmCell : LilyRhythmObj {
 
 
-	var  <>struct, <>lenght;
-	var <>template="rhythmic";
+	var <>struct, <>lenght;
+	var <>template = "rhythmic";
 	
-	*new { arg setThisLenght, setThisStruct;
 
+	*new { arg setThisLenght, setThisStruct;
+		
 		^super.new.initRhythmCell(setThisLenght, setThisStruct);
 	}
-
-
+	
+	
 	initRhythmCell { arg thisLenght, thisStruct;
-
+		
 		this.lenght_(thisLenght);
 		this.struct_(thisStruct);
 	}
@@ -34,7 +35,7 @@ RhythmCell : LilyRhythmObj {
 			
 			{ i.isKindOf(Array) }	
 			{
-				[this.adjustedHeads[j], RhythmCell(this.adjustedHeads[j], i[1]).adjustedStruct]
+				[this.adjustedHeads[j], RhythmCell(this.adjustedHeads[j], i[1]).struct]
 			};
 		})
 	}
@@ -43,8 +44,15 @@ RhythmCell : LilyRhythmObj {
 	adjustedLyStruct {
 
 		^this.adjustedStruct.deepCollect(
-			this.adjustedStruct.rank+1,
-			{|i| durationDict.findKeyForValue(i)}
+			this.adjustedStruct.rank,
+			{|i| 
+				case
+				{i.isKindOf(Number)}	
+				{durationDict.findKeyForValue(i)}
+				
+				{i.isKindOf(Array)}	
+				{i};
+			}
 		)
 	}
 
@@ -140,47 +148,87 @@ RhythmCell : LilyRhythmObj {
 		var levelString = String.new;
 		var stringOut = String.new;
 
+
 		thisLevel.do { levelString = levelString ++ "\t"};
+
 
 		this.hasTuplet.if({
 			stringOut = levelString ++ this.tupletString ++ "{ \n" ++ levelString ++ "\t";
 		});
 
+
 		thisTree.do { arg thisNumber;
 			stringOut = stringOut ++ "c'" ++ thisNumber.asString ++ "  "
 		};
 
+
 		this.hasTuplet.if({
 			stringOut = stringOut ++ "\n" ++ levelString ++ "}"
 		});
+
 
 		^stringOut;
 
 	}
 
 
-	woTimeSigString { arg thisLevel =1;
-	
-		this.struct.containsSeqColl.not.if(
-			{ ^this.simpleString(this.adjustedLyStruct, thisLevel)}
-		);
+	noTimeSigString { arg thisLevel =1;
 
+		var stringOut = String.new;
+		var levelString = String.new;
+		
+		thisLevel.do { levelString = levelString ++ "\t"};
+		
+		this.struct.containsSeqColl.not.if({
+
+				stringOut = this.simpleString(this.adjustedLyStruct, thisLevel)
+			
+			},{
+
+				this.hasTuplet.if({
+					stringOut = levelString ++ this.tupletString ++ "{ \n" ++ levelString ++ "\t";
+				});
+				
+				this.adjustedStruct.do {arg thisItem, thisIndex;
+
+					case
+					{thisItem.isNumber}
+					{stringOut = stringOut ++ "c'" ++ durationDict.findKeyForValue(thisItem) ++ "  "}
+
+					{thisItem.isArray}
+					{
+						var thisCell;
+
+						thisCell = RhythmCell((thisItem[0]), thisItem[1]).noTimeSigString;
+						stringOut = stringOut ++ thisCell ++ " \n \t";
+					}
+					
+				}; 
+
+				this.hasTuplet.if({
+					stringOut = stringOut ++ "\n" ++ levelString ++ "}"
+				});
+				
+			} 
+			
+		); //end if
+
+
+		^stringOut;
 	}
 
 
 	string {
 
-		var thisString;
-		
-		thisString = "\\time ";
-		thisString = thisString ++ measureScaleLily[(this.lenght*2)-1].asString ++ "\n";
-		thisString = thisString ++ this.woTimeSigString ++ "\n";
-
-		^thisString
-		
+		^("\\time " ++ measureScaleLily[(this.lenght*2)-1].asString ++ "\n" ++ this.noTimeSigString ++ "\n")
 	}
 
 	
+	musicString {
+		
+		^("\\new RhythmicStaff {\n" ++ this.string ++ "\n}")
+			
+	}
 
 
 }
