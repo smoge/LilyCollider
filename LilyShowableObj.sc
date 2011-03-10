@@ -1,20 +1,19 @@
 
 LilyShowableObj : LilyObj {
-	
-	var <>fileName = "~/Desktop/LilyCollider";
-	var <>pdfViewer = "xpdf"; // okular / evince
-	var <>textEditor = "frescobaldi"; // emacsclient / jedit
-	var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider/templates";
+
+    var <>fileName = "~/Desktop/LilySketch";
+    var <>pdfViewer = "okular"; // okular / evince
+    var <>textEditor = "frescobaldi"; // emacsclient / jedit
+    var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider/templates";
     var <>template = "doc";
 
-/*
- * NOTE try later smaller png preview images with sxiv as a viewer 
- */
+    
+/* NOTE try later smaller png preview images with sxiv as a viewer */
 
 
-	*new {
-		^super.new;
-	}
+    *new {
+        ^super.new;
+    }
 
 
     musicString {
@@ -22,10 +21,12 @@ LilyShowableObj : LilyObj {
         ^("{\n" ++  this.string ++ "\n}\n").asString;
     }
 
+
     templateFile {
         ^(this.templatesFolder ++ "/" ++ this.template ++ ".ly").standardizePath
     }
-    
+
+
     header {
         var file, content;
      
@@ -34,24 +35,25 @@ LilyShowableObj : LilyObj {
         file.close;
         ^content;
     }
-   
-	write {
-		var file;
-		
-		file = File(this.fileName.standardizePath ++ ".ly","w");
-//      file.write(this.header ++ "\n");
+
+
+    write {
+        var file;
+
+        file = File(this.fileName.standardizePath ++ ".ly","w");
         file.write(this.header);
-		file.write(this.musicString);
-		file.close;
-	}
+        file.write(this.musicString);
+        file.close;
+    }
+
 
     templatePathList {
 
         ^(templatesFolder ++ "/*").pathMatch
-
     }
+
     
-	templateList {
+    templateList {
         
         ^(this.templatePathList.collect {|i| i.basename})
         
@@ -64,28 +66,23 @@ LilyShowableObj : LilyObj {
         ).unixCmd;
     }
 
-	
-	plot {
-		
-		fork {
-			this.write;
-			0.1.wait;
-			(
+
+    plot {
+
+        fork {
+            this.write;
+            0.1.wait;
+            (
                 "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
                 this.fileName.standardizePath ++ ".ly"  
-            ).unixCmd { this.show};
-		}
-	}
+            ).unixCmd { this.show };
+        }
+    }
 
-	
-	edit {
-		this.write;
-		(
-			this.textEditor ++ " " ++ this.fileName.standardizePath ++ ".ly"
-		).unixCmd;
-	}
-	
-	
 
+    edit {
+        this.write;
+        (this.textEditor ++ " " ++ this.fileName.standardizePath ++ ".ly").unixCmd;
+    }
 
 }

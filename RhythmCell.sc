@@ -1,10 +1,9 @@
 
-
 RhythmCell : LilyRhythmObj {
 
 
 	var  <>struct, <>lenght;
-
+	var <>template="rhythmic";
 	
 	*new { arg setThisLenght, setThisStruct;
 
@@ -35,7 +34,7 @@ RhythmCell : LilyRhythmObj {
 			
 			{ i.isKindOf(Array) }	
 			{
-                [this.adjustedHeads[j], RhythmCell(this.adjustedHeads[j], i[1]).adjustedStruct]
+				[this.adjustedHeads[j], RhythmCell(this.adjustedHeads[j], i[1]).adjustedStruct]
 			};
 		})
 	}
@@ -77,7 +76,7 @@ RhythmCell : LilyRhythmObj {
 		adjustedSum = this.heads.sum;
 
 		while(
-			{ adjustedSum < (this.heads.size * 8) },
+			{ (adjustedSum) < (this.lenght * 8) },
 			{ adjustedSum = adjustedSum * 2; thisFactor = thisFactor * 2 }
 		);
 
@@ -89,6 +88,7 @@ RhythmCell : LilyRhythmObj {
 	
 		^this.heads * this.factor
 	}
+
 
 	numer {
 
@@ -128,11 +128,59 @@ RhythmCell : LilyRhythmObj {
 	tupletString {
 
 		if(this.hasTuplet, {
-			^(  "times " ++ this.denom.asString ++
+			^(  "\\times " ++ this.denom.asString ++
 				"/" ++ this.numer.asString ++ " "
 			)
 		});
 	}
 
+
+	simpleString { arg thisTree, thisLevel=1;
+
+		var levelString = String.new;
+		var stringOut = String.new;
+
+		thisLevel.do { levelString = levelString ++ "\t"};
+
+		this.hasTuplet.if({
+			stringOut = levelString ++ this.tupletString ++ "{ \n" ++ levelString ++ "\t";
+		});
+
+		thisTree.do { arg thisNumber;
+			stringOut = stringOut ++ "c'" ++ thisNumber.asString ++ "  "
+		};
+
+		this.hasTuplet.if({
+			stringOut = stringOut ++ "\n" ++ levelString ++ "}"
+		});
+
+		^stringOut;
+
+	}
+
+
+	woTimeSigString { arg thisLevel =1;
 	
+		this.struct.containsSeqColl.not.if(
+			{ ^this.simpleString(this.adjustedLyStruct, thisLevel)}
+		);
+
+	}
+
+
+	string {
+
+		var thisString;
+		
+		thisString = "\\time ";
+		thisString = thisString ++ measureScaleLily[(this.lenght*2)-1].asString ++ "\n";
+		thisString = thisString ++ this.woTimeSigString ++ "\n";
+
+		^thisString
+		
+	}
+
+	
+
+
 }
