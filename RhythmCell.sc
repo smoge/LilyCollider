@@ -1,5 +1,7 @@
 
+
 RhythmCell : LilyRhythmObj {
+
 
 	var  <>struct, <>lenght;
 
@@ -12,8 +14,8 @@ RhythmCell : LilyRhythmObj {
 
 	initRhythmCell { arg thisLenght, thisStruct;
 
-		lenght = thisLenght;
-		struct = thisStruct;
+		this.lenght_(thisLenght);
+		this.struct_(thisStruct);
 	}
 
 
@@ -39,26 +41,17 @@ RhythmCell : LilyRhythmObj {
 	}
 
 
-	adjustedStructString {
+	adjustedLyStruct {
 
-		^struct.collect({|i,j|
-
-		case
-		{i.isKindOf(Number)}
-		{
-			this.adjustedString[j]
-		}
-
-		{i.isKindOf(Array)}
-		{
-			[this.adjustedString[j], RhythmCell(this.adjustedHeads[j], i[1]).adjustedStructString]
-		};
-		})
+		^this.adjustedStruct.deepCollect(
+			this.adjustedStruct.rank+1,
+			{|i| durationDict.findKeyForValue(i)}
+		)
 	}
 
-	
+
     getHead { arg thisItem;
-		
+
 		case
 		{thisItem.isKindOf(Number)}	
 		{^thisItem}
@@ -67,44 +60,35 @@ RhythmCell : LilyRhythmObj {
 		{^this.getHead(thisItem[0])};
 	}
 
-		
+
 	getHeads { arg thisList;
-		
+
 		^thisList.collect({ arg item;
 			this.getHead(item)
 		})
 	}
-	
 
-    factor {
 
-        var thisFactor, adjustedSum;
-        
-        thisFactor = 1;
-        adjustedSum = this.heads.sum;
+	factor {
 
-        while(
-            { adjustedSum < (this.heads.size * 8) },
-            { adjustedSum = adjustedSum * 2; thisFactor = thisFactor * 2 }
-        );
-        
-        ^thisFactor;
-    }
+		var thisFactor, adjustedSum;
+
+		thisFactor = 1;
+		adjustedSum = this.heads.sum;
+
+		while(
+			{ adjustedSum < (this.heads.size * 8) },
+			{ adjustedSum = adjustedSum * 2; thisFactor = thisFactor * 2 }
+		);
+
+		^thisFactor;
+	}
 
 
 	adjustedHeads {
 	
 		^this.heads * this.factor
 	}
-
-
-    adjustedString {
-
-        ^this.adjustedHeads.collect({ arg item;
-            durationDict.findKeyForValue(item)
-        });
-    }
-
 
 	numer {
 
@@ -124,7 +108,7 @@ RhythmCell : LilyRhythmObj {
 				thisDenom = thisDenom * 2
 			})
 		});
-		
+
 		^thisDenom
 	}
 
@@ -152,6 +136,3 @@ RhythmCell : LilyRhythmObj {
 
 	
 }
-
-
-
