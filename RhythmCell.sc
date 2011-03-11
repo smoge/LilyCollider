@@ -1,5 +1,5 @@
 
-RhythmCell : LilyRhythmObj {
+RhythmicCell : LilyRhythmObj {
 
 
 	var <>struct, <>lenght;
@@ -54,7 +54,7 @@ RhythmCell : LilyRhythmObj {
 			
 			{ i.isKindOf(Array) }	
 			{
-				[this.adjustedHeads[j], RhythmCell([this.adjustedHeads[j], i[1]]).struct]
+				[this.adjustedHeads[j], RhythmicCell([this.adjustedHeads[j], i[1]]).struct]
 			};
 		})
 	}
@@ -217,7 +217,7 @@ RhythmCell : LilyRhythmObj {
 					{thisItem.isArray}
 					{
 						var thisCell;
-						thisCell = RhythmCell.new(thisItem.put(0, thisItem.at(0) / 8)); 
+						thisCell = RhythmicCell.new(thisItem.put(0, thisItem.at(0) / 8)); 
 						stringOut = stringOut ++ thisCell.noTimeSigString ++ " \n \t";
 					}
 					
