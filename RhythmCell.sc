@@ -6,16 +6,15 @@ RhythmCell : LilyRhythmObj {
 	var <>template = "rhythmic";
 	
 
-	*new { arg setThisLenght, setThisStruct;
-		
-		^super.new.initRhythmCell(setThisLenght, setThisStruct);
+	*new { arg thisCell;
+		^super.new.initRhythmCell(thisCell);
 	}
 	
 	
-	initRhythmCell { arg thisLenght, thisStruct;
-		
-		this.lenght_(thisLenght);
-		this.struct_(thisStruct);
+	initRhythmCell { arg thisCell;
+
+		this.lenght_(thisCell[0]);
+		this.struct_(thisCell[1]);
 	}
 
 
@@ -24,6 +23,26 @@ RhythmCell : LilyRhythmObj {
 		^this.getHeads(struct);
 	}
 	
+
+	lyHeads {
+	
+		^this.heads.collect({|i|  
+			
+			durationDict.findKeyForValue(i)
+		})
+
+	}
+
+
+	subHeads {
+		
+		^this.heads.collect({|i|  
+			
+			i / 8.0
+		})
+
+	}
+
 
 	adjustedStruct { 
 	
@@ -35,7 +54,7 @@ RhythmCell : LilyRhythmObj {
 			
 			{ i.isKindOf(Array) }	
 			{
-				[this.adjustedHeads[j], RhythmCell(this.adjustedHeads[j], i[1]).struct]
+				[this.adjustedHeads[j], RhythmCell([this.adjustedHeads[j], i[1]]).struct]
 			};
 		})
 	}
@@ -100,7 +119,7 @@ RhythmCell : LilyRhythmObj {
 
 	numer {
 
-		^(this.adjustedHeads.sum / gcd((lenght * 8), this.adjustedHeads.sum))
+		^(this.adjustedHeads.sum / gcd((lenght * 8).asInteger, this.adjustedHeads.sum.asInteger))
 		
 	}
 	
@@ -109,7 +128,7 @@ RhythmCell : LilyRhythmObj {
 
 		var thisDenom;
 		
-		thisDenom = (lenght * 8) / gcd((lenght * 8), this.adjustedHeads.sum);
+		thisDenom = (lenght * 8) / gcd((lenght * 8).asInteger, this.adjustedHeads.sum.asInteger);
 
 		if(thisDenom < this.numer, {
 			while({(thisDenom * 2) < this.numer}, {
@@ -198,9 +217,8 @@ RhythmCell : LilyRhythmObj {
 					{thisItem.isArray}
 					{
 						var thisCell;
-
-						thisCell = RhythmCell((thisItem[0]), thisItem[1]).noTimeSigString;
-						stringOut = stringOut ++ thisCell ++ " \n \t";
+						thisCell = RhythmCell.new(thisItem.put(0, thisItem.at(0) / 8)); 
+						stringOut = stringOut ++ thisCell.noTimeSigString ++ " \n \t";
 					}
 					
 				}; 
@@ -213,9 +231,10 @@ RhythmCell : LilyRhythmObj {
 			
 		); //end if
 
-
 		^stringOut;
 	}
+
+
 
 
 	string {
@@ -225,8 +244,9 @@ RhythmCell : LilyRhythmObj {
 
 	
 	musicString {
-		
-		^("\\new RhythmicStaff {\n" ++ this.string ++ "\n}")
+		// overrides to print on a one-line staff
+		^("\\new RhythmicStaff {" ++ this.string ++ "\n}"
+		)
 			
 	}
 
