@@ -1,34 +1,21 @@
 
-a = RhythmCell([3, [[2, [1, 1, 1]], 1, 1, 1]] )
+a = RhythmicCell([3, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]] )
+a.plot
 
-a.lyHeads
-a.heads
-a.subHeads
+
+a = [
+	[3, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]],
+	[3, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]],
+	[3, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]],	
+	[3, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]]
+].asRS.plot
+
+x = rhythmicseq(a)
+x.put(a)
+x.plot
+
+a.plot
 a.string
-
-a.lenght
-a.struct
-a.edit
-a.string
-a.miniLenght
-a.noTimeSigString
-b = a.adjustedStruct[0]
-b.asRC.noTimeSigString
-b.string
-a.lenght.class
-c = [8, [1, 1, 1]].asPseudoBar
-c.asRC
-
-c[1].class
-[1, [1, 1, 1]].asRC.string
-c.asRC.string
-
-
-4 -> 0.5
-8 -> 1
-16 -> 2
-32 -> 4
-
 
 a.lenght
 a.struct
@@ -36,7 +23,7 @@ a.heads
 a.heads.sum
 a.factor 
 a.tuplet
-a = [2, [1, 1, 1, 1, 1, 1, 1, 2, 1]].asRC.plo
+a = [2, [1, 1, 1, 1, 1, 1, 1, 2, 1]].asRC
 a.hasTuplet
 a.struct
 a.adjustedStruct

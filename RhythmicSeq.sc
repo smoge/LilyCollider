@@ -1,37 +1,40 @@
 
 RhythmicSeq : LilyShowableObj {
-
+	
     var <>eventArray;
-
+	
     *new {arg event;
-        ^super.new.init(event);
+        
+		^super.new.init(event);
     }
-
-
+	
+	
     init { arg eventList=nil;
-
+		
         eventArray = Array.new;
         this.put(eventList);
-
     }
-
+	
     put { arg thisEvent;
-
+		
         case
         {(thisEvent.class == RhythmicCell)}
         {eventArray = eventArray.add(thisEvent)}
-
-        { (thisEvent.isKindOf(Array)).and(thisEvent.size == 2).and(thisEvent.at(0).isKindOf(Number)) }
-        { this.putArray(thisEvent.asRC) }
-
-		{ (thisEvent.isKindOf(Array)).and(thisEvent.at(0).isKindOf(Array))}
-		{
-			thisEvent.do({ arg stuffIn;
-				this.put(stuffIn)
-			});
-		}; 
-			
-
+		
+        {thisEvent.isKindOf(Array)}
+		{ 
+			thisEvent.do { |i|
+				
+				case
+				{i.isKindOf(RhythmicCell)}	
+				{this.put(i)}
+				
+				// it must be a valid RhythmmicCell
+				// need more checks here
+				{i.isKindOf(Array)}	
+				{this.put(RhythmicCell(i))};
+			}	
+		};	
 	}
 
     string {
@@ -47,8 +50,12 @@ RhythmicSeq : LilyShowableObj {
 
 	
 	musicString {
+
 		// overrides to print on a one-line staff
-		^("\\new RhythmicStaff {" ++ this.string ++ "\n}"
+		^(
+			"\\score { \n" ++ 
+			"\\new RhythmicStaff {" ++ this.string ++ "\n}" ++
+			"\n \\midi { } \n\t \\layout { }\t}"
 		)
 			
 	}

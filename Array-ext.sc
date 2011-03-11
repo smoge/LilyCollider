@@ -1,26 +1,37 @@
 + Array {
 
-
+	
 	gdc {
-		
+	
 		if(this.containsSeqColl.not, {
-			^this.reduce({arg a, b; a gcd: b})
+			^this.reduce({arg a, b; a.asInteger gcd: b.asInteger})
 		});	
 	}
-
-
+	
+	
 	asRC {
 
-		^RhythmCell(this)
+		^RhythmicCell(this)
+	}
+	
+
+	asRS {
+		
+		^RhythmicSeq(this)
 	}
 
-	asPseudoBar {
+	
+	addRC { arg thisRSeq;
 		
-		var thisLenght, thisStruct;
-		
-		#thisLenght, thisStruct = this;
-		thisLenght = (thisLenght.asFloat / 8).round(0.5);
-		^[thisLenght, thisStruct];
+		thisRSeq.put(this)
 	}
 
+
+	addRS { arg thisRSeq;
+		
+		this.do { |i|
+			thisRSeq.put(i)
+		};
+	}
+	
 }

@@ -7,6 +7,7 @@ RhythmicCell : LilyRhythmObj {
 	
 
 	*new { arg thisCell;
+
 		^super.new.initRhythmCell(thisCell);
 	}
 	
@@ -16,6 +17,7 @@ RhythmicCell : LilyRhythmObj {
 		this.lenght_(thisCell[0]);
 		this.struct_(thisCell[1]);
 	}
+
 
 
 	heads {	
@@ -250,5 +252,34 @@ RhythmicCell : LilyRhythmObj {
 			
 	}
 
+
+	////////////////////////////
+    // Rhythmic Manipulations //
+    ////////////////////////////
+	
+	
+	lenghtAdd { arg thisNumber;
+		
+		this.lenght_(this.lenght + thisNumber)
+	}
+
+	
+	lenghtMul  { arg thisNumber;
+		
+		this.lenght_(this.lenght * thisNumber)
+	}
+
+
+	// substitute an element:
+	subst { arg thisIndex, thisItem;
+		
+		this.struct_(this.struct.put(thisIndex, thisItem))
+	}
+
+	
+	reshapeLike { arg other;
+		//	TODO other index operators: \foldAt \clipAt \at
+		this.struct_(this.struct.reshapeLike(other.struct));
+	}
 
 }
