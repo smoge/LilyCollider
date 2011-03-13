@@ -13,10 +13,9 @@
    tagline = ""
 }
 
-\paper {
- 	#(set-paper-size "a3" 'landscape)
+#(set-default-paper-size "a3" 'landscape)
+#(set-global-staff-size 14)
 
-}
 
 \layout {
 

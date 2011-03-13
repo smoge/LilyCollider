@@ -38,7 +38,7 @@
 
 TendencyMask {
     
-    var <>parX, <>parY, <>parA, <>parB, <>n, <thisTendency, <>dist;
+    var <>parX, <>parY, <>parA, <>parB, <>n, <thisTendency, <>dist, <>data;
 
     *new {|n|
         ^super.new.init(n);
@@ -53,7 +53,9 @@ TendencyMask {
 
     gui {
 
-        /////// GUI Start /////////
+        /////////////////////////////////
+        // /////// GUI Start ///////// //
+        /////////////////////////////////
 
         var win, view1, view2, swapData, config, urView, data1, data2; 
         data1 = 1.0.dup(50); 
@@ -111,7 +113,10 @@ TendencyMask {
         }; 
         swapData.value(0); 
         win.front; 
-        ///// GUI End /////////////
+
+        /////////////////////////////////
+        // ///// GUI End ///////////// //
+        /////////////////////////////////
     }
 
 
@@ -207,15 +212,44 @@ TendencyMask {
     }
 
     make {
-        thisTendency = Tendency.new( parX, parY, parA, parB);
-        ^n.collect({ |i|
+        
+		var thisOut;
+		
+		thisTendency = Tendency.new( parX, parY, parA, parB);
+        thisOut = n.collect({ |i|
             i = i / n;
             thisTendency.at(i, dist.asString)
         }); 
+
+		this.data_(thisOut);
+		^thisOut;
     }
 
     plot {
         this.make.plot(discrete: true, minval:0.0, maxval:1.0);
     }
+
+
+	////////////////////////////
+    // Integration with Pitch //
+    ////////////////////////////
+
+	asPitchSeq { arg thisMul=12, thisAdd=0;
+		
+		var pitchArray;
+		
+		pitchArray = data.collect { |i|
+			LilyPitch((i * thisMul) + thisAdd)
+		};
+
+		^LilyPitchSeq(pitchArray);
+
+	}
+
+
+
+
+
+
 
 }

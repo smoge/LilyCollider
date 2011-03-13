@@ -2,7 +2,8 @@
 LilyPitchSeq : LilyShowableObj {
 
     var <>eventArray;
-
+	var <>template = "just-pitches";
+	
     *new {arg event;
         ^super.new.init(event);
     }

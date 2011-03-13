@@ -8,7 +8,7 @@ LilyShowableObj : LilyObj {
     var <>template = "doc";
 
     
-/* NOTE try later smaller png preview images with sxiv as a viewer */
+	/* NOTE try later smaller png preview images with sxiv as a viewer */
 
 
     *new {

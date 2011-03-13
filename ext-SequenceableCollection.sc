@@ -40,8 +40,8 @@
     // -> [ 1, 1, 1, 2, [ 1, [ 1, 2, 1, 1, 1 ] ], 1, 1, 3 ]
 
     rotateStruct { arg nRotations = 1 ;
-
-        var newStruct;
+		
+		var newStruct;
         newStruct = this.flat.rotate(nRotations).bubble;
         ^newStruct.reshapeLike(this);
         

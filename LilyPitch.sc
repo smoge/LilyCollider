@@ -4,6 +4,7 @@ LilyPitch : LilyShowableObj {
 
     var <notenumber, <>duration;
     var <pitch, <octave, <artic, <>afterNote, <>beforeNote;
+	var <>template = "just-pitches";
     
     *new { arg notenumber;
         ^super.new.init(notenumber);

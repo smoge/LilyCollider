@@ -1,3 +1,4 @@
+// maybe: RhythmicStaff ?
 
 RhythmicSeq : LilyShowableObj {
 	
@@ -15,6 +16,7 @@ RhythmicSeq : LilyShowableObj {
         this.put(eventList);
     }
 	
+
     put { arg thisEvent;
 		
         case
@@ -24,11 +26,9 @@ RhythmicSeq : LilyShowableObj {
         {thisEvent.isKindOf(Array)}
 		{ 
 			thisEvent.do { |i|
-				
 				case
 				{i.isKindOf(RhythmicCell)}	
 				{this.put(i)}
-				
 				// it must be a valid RhythmmicCell
 				// need more checks here
 				{i.isKindOf(Array)}	
@@ -48,14 +48,21 @@ RhythmicSeq : LilyShowableObj {
         ^outString;
     }
 
+
+	staffString {
+
+		^(
+			"\\new RhythmicStaff {\n" ++ this.string ++ "\n}"
+		)
+			
+	}
 	
 	musicString {
 
-		// overrides to print on a one-line staff
 		^(
 			"\\score { \n" ++ 
-			"\\new RhythmicStaff {" ++ this.string ++ "\n}" ++
-			"\n \\midi { } \n\t \\layout { }\t}"
+			this.staffString ++
+			"\n \\midi { } \n\t \\layout { }\n}"
 		)
 			
 	}

@@ -6,10 +6,7 @@ a.denom;
 
 b = Fraction(3, 5);
 
-This does not work:
 a + b
-
-
 
 */
 

@@ -37,11 +37,11 @@
       \override NoteColumn #'ignore-collision = ##t
 
       % beaming
-      autoBeaming = ##f
+      %autoBeaming = ##f
 
       % tuplet handling
       tupletFullLength = ##t
-		\override TupletNumber #'text = #tuplet-number::calc-fraction-text
+      \override TupletNumber #'text = #tuplet-number::calc-fraction-text
       \override TupletBracket #'bracket-visibility = ##t
       \override TupletBracket #'padding = #2
       % allow tuplet bracket to always be visible, even for short tuplets.
@@ -49,7 +49,7 @@
       \override TupletBracket #'minimum-length = #3
 
       % bar numbers
-      %\remove Bar_number_engraver
+      \remove Bar_number_engraver
 
       % text handling
       \override TextScript #'staff-padding = #4
@@ -74,5 +74,8 @@
     }
 }
       
-#(set-default-paper-size "a4" 'landscape)
-#(set-global-staff-size 15)
+#(set-default-paper-size "a3" 'landscape)
+#(set-global-staff-size 14)
+
+
+

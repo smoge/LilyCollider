@@ -35,3 +35,6 @@
 }
 
 
+#(set-default-paper-size "a3" 'landscape)
+#(set-global-staff-size 14)
+

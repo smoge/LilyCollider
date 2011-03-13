@@ -2,135 +2,136 @@
 LilyChord : LilyShowableObj {
 
 
-    var <>noteArray;
+	var <>noteArray;
+	var <>template = "just-pitches";
 
 
-    *new { arg noteList;
-        ^super.new.init(noteList);
-    }
+	*new { arg noteList;
+		^super.new.init(noteList);
+	}
 
 
-    init { arg firstStuff;
+	init { arg firstStuff;
 
-        noteArray = Array.new;
-        this.put(firstStuff);
-    }
-
-
-    notenumber {
-
-        ^noteArray.collect({ arg thisEvent;
-            thisEvent.notenumber
-        })
-    }
+		noteArray = Array.new;
+		this.put(firstStuff);
+	}
 
 
-    put { arg putThis;
+	notenumber {
 
-        if(this.includes(putThis).not, {
-
-            if(putThis.isKindOf(Number), {
-                noteArray = noteArray.add(LilyPitch.new(putThis))
-            });
-
-            if(putThis.isKindOf(LilyPitch), {
-                noteArray = noteArray.add(putThis)
-            });
-
-            if(putThis.isKindOf(Array), {
-                this.putArray(putThis)
-            });
-        });
-    }
+		^noteArray.collect({ arg thisEvent;
+			thisEvent.notenumber
+		})
+	}
 
 
-    putArray { arg putThis;
+	put { arg putThis;
 
-        putThis.do { arg thisOne;
-            this.put(thisOne);
-        };
+		if(this.includes(putThis).not, {
 
-    }
+			if(putThis.isKindOf(Number), {
+				noteArray = noteArray.add(LilyPitch.new(putThis))
+			});
 
+			if(putThis.isKindOf(LilyPitch), {
+				noteArray = noteArray.add(putThis)
+			});
 
-    includes { arg testPitch;
-
-        var thisTest;
-
-        if(testPitch.isKindOf(LilyPitch),
-            {thisTest = testPitch.notenumber},
-            {thisTest = testPitch}
-        );
-        ^this.notenumber.includes(thisTest)
-    }
+			if(putThis.isKindOf(Array), {
+				this.putArray(putThis)
+			});
+		});
+	}
 
 
-    qt {
-        ^noteArray.collect({|i| i.qt})
-    }
+	putArray { arg putThis;
+
+		putThis.do { arg thisOne;
+			this.put(thisOne);
+		};
+
+	}
 
 
-    intervals  {
-        var intervals, notes;
+	includes { arg testPitch;
 
-        notes = this.notenumber;
-        (notes.size - 1).do({|i|
-            intervals = intervals.add(notes[i + 1] - notes[i]) });
-        ^intervals;
-    }
+		var thisTest;
 
-
-    stringArray {
-
-        ^this.noteArray.collect({|i| i.pitch ++ i.octave;})
-    }
+		if(testPitch.isKindOf(LilyPitch),
+			{thisTest = testPitch.notenumber},
+			{thisTest = testPitch}
+		);
+		^this.notenumber.includes(thisTest)
+	}
 
 
-    string {
-
-        var musicStringOut;
-
-        musicStringOut = "< ";
-        this.stringArray.do({|i|
-            musicStringOut = musicStringOut ++ i ++ " "
-        });
-
-        ^musicStringOut ++ ">";
-    }
+	qt {
+		^noteArray.collect({|i| i.qt})
+	}
 
 
-    ////////////////////////////////////////////////////
-    // these are methods to manipulate chords as Sets //
-    ////////////////////////////////////////////////////
+	intervals  {
+		var intervals, notes;
+
+		notes = this.notenumber;
+		(notes.size - 1).do({|i|
+			intervals = intervals.add(notes[i + 1] - notes[i]) });
+		^intervals;
+	}
 
 
-    - { arg otherChord;
+	stringArray {
 
-        ^LilyChord(this.notenumber.asSet - otherChord.notenumber.asSet)
-    }
-
-
-    -- { arg otherChord;
-
-        ^LilyChord(this.notenumber.asSet -- otherChord.notenumber.asSet)
-    }
+		^this.noteArray.collect({|i| i.pitch ++ i.octave;})
+	}
 
 
-    | { arg otherChord;
+	string {
 
-        ^LilyChord(this.notenumber.asSet | otherChord.notenumber.asSet)
-    }
+		var musicStringOut;
+
+		musicStringOut = "< ";
+		this.stringArray.do({|i|
+			musicStringOut = musicStringOut ++ i ++ " "
+		});
+
+		^musicStringOut ++ ">";
+	}
 
 
-    & { arg otherChord;
+	////////////////////////////////////////////////////
+	// these are methods to manipulate chords as Sets //
+	////////////////////////////////////////////////////
 
-        ^LilyChord(this.notenumber.asSet & otherChord.notenumber.asSet)
-    }
+
+	- { arg otherChord;
+
+		^LilyChord(this.notenumber.asSet - otherChord.notenumber.asSet)
+	}
 
 
-    isSubsetOf { arg otherChord;
+	-- { arg otherChord;
 
-        ^LilyChord(this.notenumber.asSet.isSubsetOf(otherChord.notenumber.asSet))
-    }
+		^LilyChord(this.notenumber.asSet -- otherChord.notenumber.asSet)
+	}
+
+
+	| { arg otherChord;
+
+		^LilyChord(this.notenumber.asSet | otherChord.notenumber.asSet)
+	}
+
+
+	& { arg otherChord;
+
+		^LilyChord(this.notenumber.asSet & otherChord.notenumber.asSet)
+	}
+
+
+	isSubsetOf { arg otherChord;
+
+		^LilyChord(this.notenumber.asSet.isSubsetOf(otherChord.notenumber.asSet))
+	}
 
 }
