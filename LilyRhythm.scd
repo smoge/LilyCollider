@@ -39,6 +39,8 @@ Post << f.([1,2,3,4], 5, 8)
 
 
 
+x.edit
+
 a = [
 	[3, [1, [2, [1, 1, [1, [1, 1, 1]], 1, 1, 1]], 1, 4, 2]],
 	[4, [2, [2, [1, 1, 1, 1, 1, 1]], 1, 4, 2]],
@@ -50,8 +52,39 @@ a = [
 	[4, [4, [2, [1, 1, 1, 1, 1, 1, 1]], 2, 4, 1]]
 ];	
 
-a.asRS.plot
+a.scramble.asRS
 
+[[1, 2, 3, 4], [[9, 1, 2], [8, 2, 3], [7, 4, 3]]].flop
+Help.gui
+
+
+x = RhythmicGroup2();
+x.putMeasure([2, 4, 3, 2, 3, 4, 2]);
+x.putStruct([[2, 1, 3, 2, 1], [1, 2, 1, 3, 2], [2, 1, 3, 2, 1, 2, 3, 2], [2, 1, 2, 3, 1]]);
+x.voiceArray
+
+x.structMatrix
+[
+	[2, 4, 3, 2, 3, 4, 2],
+	[[2, 1, 3, 2, 1], [1, 2, 1, 3, 2], [2, 1, 3, 2, 1, 2, 3, 2], [2, 1, 2, 3, 1]]
+].flop
+
+
+x.voice
+x.plot
+
+
+x.edit
+x.voiceArray
+
+x.structArray
+x.measureArray
+x.string
+
+(a.scramble.asRS)
+x.put(a.scramble.asRS)
+
+x.plot
 
 
 a = [[10,20],[30, 40, 50], 60, 70, [80, 90, 100]];

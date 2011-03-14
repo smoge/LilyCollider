@@ -1,7 +1,7 @@
 /*
 
 # Init #
-
+"Ctk".include
 	a = RhythmicSystem([2, 3, 4]) // <--- Init with measures
 	a.putMeasure([2, 3, 2]) // <---you can add more later
 
@@ -70,7 +70,7 @@ RhythmicSystem : LilyShowableObj {
 
 
 	///////////////////////////////////////////
-	//	Manipulations an measures and struct //
+	//	Manipulations on measures and struct //
 	///////////////////////////////////////////
 
 	scrambleMeasures {
