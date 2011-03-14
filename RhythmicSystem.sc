@@ -1,15 +1,20 @@
-
 /*
-a = RhythmicSystem()
-a.putMeasure([2, 3, 2])
-a.putStruct([[1, 1, 1], [1, 2, 1], [2, 1, 2]])
-a.putStruct([[1, 2, 1], [1, 2, 1], [2, 1, 2]])
-a.putStruct([[1, 2, 1], [1, 2, 1, 1], [1, 2, 1]])
 
-a.voices
-a.plot
-a.structs.minSize
-a.measures
+# Init #
+
+	a = RhythmicSystem([2, 3, 4]) // <--- Init with measures
+	a.putMeasure([2, 3, 2]) // <---you can add more later
+
+	a.putStruct([[1, 1, 1], [1, 2, 1], [2, 1, 2]].scramble) // <-- this inserts a structure on the tail
+	a.putStruct([[1, 2, 1], [1, 2, 1], [2, 1, 2]])
+	a.putStruct([[1, 2, 1], [1, 2, 1, 1], [1, 2, 1]])
+
+	a.plot
+
+# Manipulation on Measures and Structures # 
+
+
+
 */
 
 RhythmicSystem : LilyShowableObj {
@@ -18,14 +23,16 @@ RhythmicSystem : LilyShowableObj {
 	var <>structs;
 	var <>template="rhythmic";
 
-	*new { 
-		^super.new.initRhythmicGroup
+	*new { arg thisMeasures;
+		^super.new.initRhythmicSystem(thisMeasures)
 	}
-	
 
-	initRhythmicGroup {
 
-		
+	initRhythmicSystem { arg thisMeasures=nil;
+
+		thisMeasures.notNil.if {
+			this.putMeasure(thisMeasures)
+		}
 	}
 
 
@@ -60,11 +67,60 @@ RhythmicSystem : LilyShowableObj {
 			this.putStruct(i)
 		};
 	}
+
+
+	///////////////////////////////////////////
+	//	Manipulations an measures and struct //
+	///////////////////////////////////////////
+
+	scrambleMeasures {
+		this.measures_(this.measures.scramble)
+	}
+
+	rotateMeasures { arg n;
+		this.measures_(this.measures.rotate(n))
+	}
 	
-	/* a = [~measures, ~structs1].flop.asRS;
-	* b = [~measures, ~structs2].flop.asRS;
-	* c = [~measures, ~structs3].flop.asRS;
-	*/
+	insertMeasure { arg index, item;
+		this.measures_(this.measures.insert(index, item))
+	}
+
+	permuteMeasures { arg n;
+		this.measures_(this.measures.permute(n))
+	}
+	
+	scrambleStructs {
+		this.structs_(this.structs.scramble)
+	}
+
+	rotateStructs { arg n;
+		this.structs_(this.structs.rotate(n))
+	}
+
+	insertStruct { arg index, item;
+		this.structs_(this.structs.insert(index, item))
+	}
+
+	permuteStructs { arg n;
+		this.structs_(this.structs.permute(n))
+	}
+
+	indicesOfEqual { arg thisValue;
+		this.measures.indicesOfEqual(thisValue);
+	}
+
+	swapMeasures { arg i,j;
+		this.measures_(this.measures.swap(i,j))
+	}
+
+	swapStructs { arg i,j;
+		this.structs_(this.structs.swap(i,j))		
+	}
+
+
+	///////////////////////////////////////////
+	///////////////////////////////////////////
+
 
 	voices {
 
