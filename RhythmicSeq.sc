@@ -3,7 +3,7 @@
 RhythmicSeq : LilyShowableObj {
 	
     var <>eventArray;
-	
+    var <>template = "rhythmic";
     *new {arg event;
         
 		^super.new.init(event);

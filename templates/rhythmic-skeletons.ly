@@ -35,5 +35,3 @@
 }
       
 #(set-global-staff-size 14)
-
-{c' d' e'}

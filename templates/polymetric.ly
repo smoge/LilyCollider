@@ -30,7 +30,7 @@
       \Score
 
       % proportional notation
-      proportionalNotationDuration = #(ly:make-moment 1 12)
+      %proportionalNotationDuration = #(ly:make-moment 1 12)
    	%\override SpacingSpanner #'strict-note-spacing = ##t  
    	%\override SpacingSpanner #'strict-grace-spacing = ##t
 		\override SpacingSpanner #'uniform-stretching = ##t

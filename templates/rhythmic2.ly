@@ -10,73 +10,73 @@
 %%%   * Paper layout is landscape
 
 \header{
-   tagline = ""
+  tagline = ""
 }
 
 \layout {
-   indent = #0
-   ragged-right = ##t
+  indent = #0
+  ragged-right = ##t
 
-   \context {
-      \Score
+  \context {
+    \Score
 
-      % proportional notation
-      %proportionalNotationDuration = #(ly:make-moment 1 64)
-      proportionalNotationDuration = #(ly:make-moment 1 74)
-   	%\override SpacingSpanner #'strict-note-spacing = ##t  
-   	\override SpacingSpanner #'strict-grace-spacing = ##t
-		\override SpacingSpanner #'uniform-stretching = ##t
+    % proportional notation
+    %proportionalNotationDuration = #(ly:make-moment 1 64)
+    proportionalNotationDuration = #(ly:make-moment 1 74)
+    %\override SpacingSpanner #'strict-note-spacing = ##t
+    \override SpacingSpanner #'strict-grace-spacing = ##t
+    \override SpacingSpanner #'uniform-stretching = ##t
 
-      % breakable spanners
-		\override Glissando #'breakable = ##t
-      \override Beam #'breakable = ##t
-      \override TextSpanner #'breakable = ##t
+    % breakable spanners
+    \override Glissando #'breakable = ##t
+    \override Beam #'breakable = ##t
+    \override TextSpanner #'breakable = ##t
 
-      % collisions
-      \override NoteColumn #'ignore-collision = ##t
+    % collisions
+    \override NoteColumn #'ignore-collision = ##t
 
-      % beaming
-      autoBeaming = ##f
+    % beaming
+    autoBeaming = ##f
 
-      % tuplet handling
-      tupletFullLength = ##t
-		\override TupletNumber #'text = #tuplet-number::calc-fraction-text
-      \override TupletBracket #'bracket-visibility = ##t
-      \override TupletBracket #'padding = #2
-      % allow tuplet bracket to always be visible, even for short tuplets.
-      \override TupletBracket #'springs-and-rods = #ly:spanner::set-spacing-rods
-      \override TupletBracket #'minimum-length = #3
+    % tuplet handling
+    tupletFullLength = ##t
+    \override TupletNumber #'text = #tuplet-number::calc-fraction-text
+    \override TupletBracket #'bracket-visibility = ##t
+    \override TupletBracket #'padding = #2
+    % allow tuplet bracket to always be visible, even for short tuplets.
+    \override TupletBracket #'springs-and-rods = #ly:spanner::set-spacing-rods
+    \override TupletBracket #'minimum-length = #3
 
-      % bar numbers
-      %\remove Bar_number_engraver
+    % bar numbers
+    %\remove Bar_number_engraver
 
-      % text handling
-      \override TextScript #'staff-padding = #4
+    % text handling
+    \override TextScript #'staff-padding = #4
 
-   }
+  }
 
-   \context {
-      \Staff
-      \override TimeSignature #'style = #'numbered
-   }
+  \context {
+    \Staff
+    \override TimeSignature #'style = #'numbered
+  }
 
-   \context {
-      \RhythmicStaff
-      \override TimeSignature #'style = #'numbered
-      \override VerticalAxisGroup #'minimum-Y-extent = #'(-2 . 4)
-   }
+  \context {
+    \RhythmicStaff
+    \override TimeSignature #'style = #'numbered
+    \override VerticalAxisGroup #'minimum-Y-extent = #'(-2 . 4)
+  }
 
-   \context{
-      \Voice
-      % allow line break in spanning durations.
-      \remove "Forbid_line_break_engraver"
-    }
+  \context{
+    \Voice
+    % allow line break in spanning durations.
+    \remove "Forbid_line_break_engraver"
+  }
 }
 
-#(set-default-paper-size "a3" 'landscape)
+#(set-default-paper-size "a4" 'landscape)
 #(set-global-staff-size 14)
 
 
 
-  
+
 

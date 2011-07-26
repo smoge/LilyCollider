@@ -216,10 +216,10 @@ RhythmicCell : LilyRhythmObj {
 					{thisItem.isNumber}
 					{stringOut = stringOut ++ "c'" ++ durationDict.findKeyForValue(thisItem) ++ "  "}
 
-					{thisItem.isArray} { 
+					{thisItem.isArray} 
+					{ 
 						stringOut = stringOut ++
-						RhythmCell.new(thisItem.put(0, thisItem.at(0) /
-							8)).noTimeSigString ++ " \n \t"; 
+						(RhythmicCell.new(thisItem.put(0, thisItem.at(0) / 8)).noTimeSigString) ++ " \n \t"; 
 					}
 					
 				}; 

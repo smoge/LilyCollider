@@ -28,16 +28,16 @@ a = LilyPitch.new(30);
 b = LilyPitch.new(31);
 
 d = LilyChord()
-d.put(a)
+d.put(b)
 d.includes(30)
-
+d.plot
 c = LilyPitch.new(33);
 b = LilyChord(a)
-b.put([1, 2, 4])
+b.put([1, 2, 4, 5, 6, 12])
 b.notenumber
 b.includes(33)
 b.includes(LilyPitch(33))
-
+b.plot
 
 
 b.noteArray
