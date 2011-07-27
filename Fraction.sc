@@ -1,12 +1,12 @@
 /*
 
-a = Fraction(5, 10);
-a.numer;
-a.denom;
+    a = Fraction(5, 10);
+    a.numer;
+    a.denom;
 
-b = Fraction(3, 5);
+    b = Fraction(3, 5);
 
-a + b
+    a + b
 
 */
 

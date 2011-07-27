@@ -63,7 +63,7 @@ Dyn {
     asString {
         var list;
         list = this.scList;
-         ^scale.at(list.indexIn(scDyn))
+        ^scale.at(list.indexIn(scDyn))
     }
 
     string_ { arg newValue;

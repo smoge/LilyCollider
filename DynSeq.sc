@@ -1,23 +1,23 @@
 /*
 
-# LilyDynSeq.sc #
+    # LilyDynSeq.sc #
 
-_Sequenceble Collection of Dyn (Dynamics) Instances_
-See Dyn.sc
+    _Sequenceble Collection of Dyn (Dynamics) Instances_
+    See Dyn.sc
 
 
-## Default ##
+    ## Default ##
 
     scale = [\ppp, \pp, \p, \mp, \mf, \f, \ff, \fff]
     values: 0.0 <-> 1.0
 
 
-## Usage ##
+    ## Usage ##
 
     a = LilyDynSeq.new([0.3, 0.2, 0.4])
     a = LilyDynSeq.new(
-            ((1..10)/10).scramble,
-            [\pppp, \ppp, \pp, \p, \mp, \mf, \f, \ff, \fff, \ffff]
+    ((1..10)/10).scramble,
+    [\pppp, \ppp, \pp, \p, \mp, \mf, \f, \ff, \fff, \ffff]
     );
 
     a.dynSeq

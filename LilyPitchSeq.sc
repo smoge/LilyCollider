@@ -2,8 +2,8 @@
 LilyPitchSeq : LilyShowableObj {
 
     var <>eventArray;
-	var <>template = "just-pitches";
-	
+    var <>template = "just-pitches";
+
     *new {arg event;
         ^super.new.init(event);
     }
@@ -53,4 +53,21 @@ LilyPitchSeq : LilyShowableObj {
         ^outString;
     }
 
+    staffString {
+
+        ^(
+            "\\new Staff {\n" ++ this.string ++ "\n}"
+        )
+
+    }
+
+    musicString {
+
+        ^(
+            "\\score { \n" ++
+            this.staffString ++
+            "\n \\midi { } \n\t \\layout { }\n}"
+        )
+
+    }
 }

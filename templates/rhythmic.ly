@@ -13,7 +13,7 @@
   tagline = ""
 }
 
-
+\midi{}
 \layout {
   indent = #0
   ragged-right = ##t
@@ -22,8 +22,8 @@
     \Score
 
     % proportional notation
-    %proportionalNotationDuration = #(ly:make-moment 1 64)
-    proportionalNotationDuration = #(ly:make-moment 1 74)
+    proportionalNotationDuration = #(ly:make-moment 1 64)
+    %proportionalNotationDuration = #(ly:make-moment 1 74)
     %\override SpacingSpanner #'strict-note-spacing = ##t
     %\override SpacingSpanner #'strict-grace-spacing = ##t
     %\override SpacingSpanner #'uniform-stretching = ##t
@@ -35,9 +35,6 @@
 
     % collisions
     \override NoteColumn #'ignore-collision = ##t
-
-    % beaming
-    %autoBeaming = ##f
 
     % tuplet handling
     tupletFullLength = ##t
@@ -75,7 +72,7 @@
 }
 
 #(set-default-paper-size "a4" 'landscape)
-#(set-global-staff-size 12)
+#(set-global-staff-size 13)
 
 
 

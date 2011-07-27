@@ -10,6 +10,7 @@
    tagline = ""
 }
 
+\midi {}
 
 \layout {
 

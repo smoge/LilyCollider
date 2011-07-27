@@ -3,13 +3,12 @@ LilyShowableObj : LilyObj {
 
     var <>fileName = "~/Desktop/LilySketch";
     var <>pdfViewer = "okular"; // okular / evince
+    var <>midiPlayer = "kmid";
     var <>textEditor = "frescobaldi"; // emacsclient / jedit
     var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider/templates";
     var <>template = "doc";
 
-    
-	/* NOTE try later smaller png preview images with sxiv as a viewer */
-
+    /* NOTE try later smaller png preview images with sxiv as a viewer */
 
     *new {
         ^super.new;
@@ -29,7 +28,7 @@ LilyShowableObj : LilyObj {
 
     header {
         var file, content;
-     
+
         file = File(this.templateFile,"r");
         content = file.readAllString;
         file.close;
@@ -52,13 +51,13 @@ LilyShowableObj : LilyObj {
         ^(templatesFolder ++ "/*").pathMatch
     }
 
-    
+
     templateList {
-        
+
         ^(this.templatePathList.collect {|i| i.basename})
-        
+
     }
-    
+
     show {
 
         (
@@ -66,6 +65,23 @@ LilyShowableObj : LilyObj {
         ).unixCmd;
     }
 
+    playMidi {
+        (
+            this.midiPlayer ++ " " ++ this.fileName.standardizePath ++ ".midi"
+        ).unixCmd;
+    }
+
+    refresh {
+
+        fork {
+            this.write;
+            0.1.wait;
+            (
+                "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
+                this.fileName.standardizePath ++ ".ly"
+            ).unixCmd;
+        }
+    }
 
     plot {
 
@@ -74,7 +90,7 @@ LilyShowableObj : LilyObj {
             0.1.wait;
             (
                 "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
-                this.fileName.standardizePath ++ ".ly"  
+                this.fileName.standardizePath ++ ".ly"
             ).unixCmd { this.show };
         }
     }

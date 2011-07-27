@@ -1,99 +1,98 @@
 + Array {
 
+    /*
+        method  for substitution of a
+        Number with a Structure
+        inside a Structure:
 
-/*
-	 method  for substitution of a
-	 Number with a Structure
-	 inside a Structure:
-	 
-	 a = [3, 2, 1, 2, 1]
-	 a.subst(3, [2, 1, 2]) // ==> [ 3, 2, 1, [ 2, [ 2, 1, 2 ] ], 1 ]
+        a = [3, 2, 1, 2, 1]
+        a.subst(3, [2, 1, 2]) // ==> [ 3, 2, 1, [ 2, [ 2, 1, 2 ] ], 1 ]
 
-	 This actually is a subdivision of a element in our score representation
+        This actually is a subdivision of a element in our score representation
 
-*/
+    */
 
-	subst { arg index, thisStruct;
+    subst { arg index, thisStruct;
 
-		case
-		{thisStruct.isKindOf(Array)}
-		{^this.put(index, [this.at(index), thisStruct])}
+        case
+        {thisStruct.isKindOf(Array)}
+        {^this.put(index, [this.at(index), thisStruct])}
 
-		{thisStruct.isKindOf(Number)}
-		{^this.put(index, thisStruct)};
-	}
-	
-
-	gdc {
-	
-		if(this.containsSeqColl.not, {
-			^this.reduce({arg a, b; a.asInteger gcd: b.asInteger})
-		});	
-	}
+        {thisStruct.isKindOf(Number)}
+        {^this.put(index, thisStruct)};
+    }
 
 
-	max {
+    gdc {
 
-		if(this.containsSeqColl.not, {
-			^this.reduce({arg a, b; a max: b})
-		});
-	}
-
-
-	min {
-
-		if(this.containsSeqColl.not, {
-			^this.reduce({arg a, b; a min: b})
-		});
-	}
+        if(this.containsSeqColl.not, {
+            ^this.reduce({arg a, b; a.asInteger gcd: b.asInteger})
+        });
+    }
 
 
-	minSize {
-		
-		^(this.collect {|i| i.size}).min
-	}
+    max {
+
+        if(this.containsSeqColl.not, {
+            ^this.reduce({arg a, b; a max: b})
+        });
+    }
 
 
-	maxSize {
+    min {
 
-		^(this.collect {|i| i.size}).max
-	}
-
-
-	asRhythmicCell {
-		^RhythmicCell(this)
-	}
+        if(this.containsSeqColl.not, {
+            ^this.reduce({arg a, b; a min: b})
+        });
+    }
 
 
-	asRC {
-		^RhythmicCell(this)
-	}
-	
+    minSize {
 
-	asRhythmicSeq {
-
-		^RhythmicSeq(this)
-	}
+        ^(this.collect {|i| i.size}).min
+    }
 
 
-	asRS {
+    maxSize {
 
-		^RhythmicSeq(this)
-	}
-
-
-	addRC { arg thisRSeq;
-		
-		thisRSeq.put(this)
-	}
+        ^(this.collect {|i| i.size}).max
+    }
 
 
-	addRS { arg thisRSeq;
-		
-		this.do { |i|
-			thisRSeq.put(i)
-		};
-	}
+    asRhythmicCell {
+        ^RhythmicCell(this)
+    }
+
+
+    asRC {
+        ^RhythmicCell(this)
+    }
+
+
+    asRhythmicSeq {
+
+        ^RhythmicSeq(this)
+    }
+
+
+    asRS {
+
+        ^RhythmicSeq(this)
+    }
+
+
+    addRC { arg thisRSeq;
+
+        thisRSeq.put(this)
+    }
+
+
+    addRS { arg thisRSeq;
+
+        this.do { |i|
+            thisRSeq.put(i)
+        };
+    }
 
 
 }

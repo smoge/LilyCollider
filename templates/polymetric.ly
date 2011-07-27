@@ -19,6 +19,8 @@
    tagline = ""
 }
 
+\midi {}
+
 \layout {
    indent = #0
    ragged-right = ##t
