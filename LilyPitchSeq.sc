@@ -63,11 +63,8 @@ LilyPitchSeq : LilyShowableObj {
 
     musicString {
 
-        ^(
-            "\\score { \n" ++
-            this.staffString ++
-            "\n \\midi { } \n\t \\layout { }\n}"
-        )
-
+        ^("\\score { \n" ++
+           this.staffString ++
+           "\n \\midi { } \n\t \\layout { }\n}" )
     }
 }

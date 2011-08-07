@@ -1,6 +1,7 @@
 + Array {
 
-    /*
+/*
+ *
         method  for substitution of a
         Number with a Structure
         inside a Structure:
@@ -60,6 +61,7 @@
 
 
     asRhythmicCell {
+
         ^RhythmicCell(this)
     }
 

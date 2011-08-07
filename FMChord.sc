@@ -5,6 +5,7 @@
     Use:
 
     a = FMChord.new(7, -5, 9)
+
     a
     a.index
     a.car
@@ -50,9 +51,11 @@ FMChord  {
     }
 
     fmChord {
+
         ^LilyChord.new(
             (this.diffChord.notenumber) ++ (this.addChord.notenumber)
         );
+
     }
 
 }

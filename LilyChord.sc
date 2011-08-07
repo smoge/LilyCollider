@@ -100,6 +100,18 @@ LilyChord : LilyShowableObj {
     }
 
 
+	asPitchSeq {
+
+		^LilyPitchSeq(this.noteArray)
+	}
+
+
+	gaussian { arg shake=0.5; 
+
+		^LilyChord(this.notenumber.gaussian(shake).round(0.5)) 
+	}
+
+
     ////////////////////////////////////////////////////
     // these are methods to manipulate chords as Sets //
     ////////////////////////////////////////////////////

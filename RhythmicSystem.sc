@@ -1,5 +1,4 @@
 /*
-    "Ctk".include
 
     a = RhythmicSystem([2, 3, 4]) // <--- Init with measures
     a.putMeasure([2, 3, 2]) // <---you can add more later
@@ -10,8 +9,6 @@
     a.putStruct([[1, 2, 1], [1, 2, 1, 1], [1, 2, 1]])
 
     a.plot
-    # Manipulation on Measures and Structures #
-
 
 */
 
@@ -28,11 +25,19 @@ RhythmicSystem : LilyShowableObj {
 
     initRhythmicSystem { arg thisMeasures=nil;
 
-        thisMeasures.notNil.if {
+        if(thisMeasures.notNil) {
             this.putMeasure(thisMeasures)
-        }
+        };
+
     }
 
+	nVoices {
+		^this.structs.size
+	}
+
+	nMeasures {
+		^this.measures.size
+	}
 
     putMeasure { arg thisMeasure;
 
@@ -68,7 +73,7 @@ RhythmicSystem : LilyShowableObj {
 
 
     // =====================================================================
-    //  Manipulations on measures and struct 
+    //  Manipulations on measures and struct
     // =====================================================================
 
     scrambleMeasures {
@@ -123,7 +128,7 @@ RhythmicSystem : LilyShowableObj {
         var thisOut;
         thisOut=[];
 
-        structs.minSize.do({ |i|
+        structs.size.do({ |i|
             thisOut = thisOut.add(
                 RhythmicSeq([ measures, structs[i] ].flop)
             )

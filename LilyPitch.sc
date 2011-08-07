@@ -23,6 +23,7 @@ LilyPitch : LilyShowableObj {
     }
 
 
+
     notenumber_ { arg newnotenumber;
 
         var index, octIndex, notenumberFloor, noteNumberFloor;

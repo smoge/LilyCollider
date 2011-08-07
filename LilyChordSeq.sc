@@ -1,14 +1,14 @@
 /*
 
-	a = LilyChord([1, 3, 5])
+	a = LilyChord([1, 3, 5]);
+	b = LilyChordSeq(a);
+	b.put(a);
+	b.string;
+	b.notenumber;
+	b.qt;
 
-	a.plot
-	b = LilyChordSeq(a)
-	b.put(a)
-	b.string
-
-	b.plot
-	b.edit
+	b.plot;
+	b.edit;
 */
 
 LilyChordSeq : LilyShowableObj {

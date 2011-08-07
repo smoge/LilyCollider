@@ -1,12 +1,12 @@
 
 LilyShowableObj : LilyObj {
 
-    var <>fileName = "~/Desktop/LilySketch";
-    var <>pdfViewer = "okular"; // okular / evince
-    var <>midiPlayer = "kmid";
-    var <>textEditor = "frescobaldi"; // emacsclient / jedit
-    var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider/templates";
-    var <>template = "doc";
+    var <>fileName =        "~/Desktop/LilySketch";
+    var <>pdfViewer =       "okular --unique"; // "xpdf -remote sclyServer"
+    var <>midiPlayer =      "kmid";
+    var <>textEditor =      "emacsclient"; /* "frescobaldi"; */
+    var <>templatesFolder = "~/share/SuperCollider/Extensions/scly/templates";
+    var <>template =        "doc";
 
     /* NOTE try later smaller png preview images with sxiv as a viewer */
 
