@@ -1,26 +1,28 @@
 
 LilyShowableObj : LilyObj {
 
-    var <>fileName =        "~/Desktop/LilySketch";
-    var <>pdfViewer =       "okular --unique"; // "xpdf -remote sclyServer"
+    var <>fileName =        "~/.scly/sketch";
+    var <>pdfViewer =       "xpdf -remote sclyserver";  // "okular --unique"
     var <>midiPlayer =      "kmid";
     var <>textEditor =      "emacsclient"; /* "frescobaldi"; */
-    var <>templatesFolder = "~/share/SuperCollider/Extensions/scly/templates";
+    var <>templatesFolder = "~/.scly/templates";
     var <>template =        "doc";
+	var <>lilyCmd=          "lilypond -dpreview ";
 
-    /* NOTE try later smaller png preview images with sxiv as a viewer */
 
     *new {
         ^super.new;
     }
 
 
+    /* Music expression between curly brackets */
     musicString {
-        // just add a pair of curly brackets
+
         ^("{\n" ++  this.string ++ "\n}\n").asString;
     }
 
 
+    /* Path of the choosen template LilyPond file */
     templateFile {
         ^(this.templatesFolder ++ "/" ++ this.template ++ ".ly").standardizePath
     }
@@ -36,6 +38,7 @@ LilyShowableObj : LilyObj {
     }
 
 
+    /* Write the File to Disk */
     write {
         var file;
 
@@ -46,56 +49,44 @@ LilyShowableObj : LilyObj {
     }
 
 
+    /* Array of the available LilyPond templates Paths */
     templatePathList {
 
         ^(templatesFolder ++ "/*").pathMatch
     }
 
 
+    /* Array of the available LilyPond templates Names */
     templateList {
 
         ^(this.templatePathList.collect {|i| i.basename})
 
     }
 
-    show {
 
-        (
-            this.pdfViewer ++ " " ++ this.fileName.standardizePath ++ ".pdf"
-        ).unixCmd;
-    }
+    /* Call the PDF Viewer to show the produced PDF File: */
+    show { (this.pdfViewer ++ " " ++ this.fileName.standardizePath ++ ".pdf" ).unixCmd }
 
-    playMidi {
-        (
-            this.midiPlayer ++ " " ++ this.fileName.standardizePath ++ ".midi"
-        ).unixCmd;
-    }
 
-    refresh {
+    /* Call the MIDI player program */
+    playMidi { ( this.midiPlayer ++ " " ++ this.fileName.standardizePath ++ ".midi" ).unixCmd }
 
-        fork {
-            this.write;
-            0.1.wait;
-            (
-                "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
-                this.fileName.standardizePath ++ ".ly"
-            ).unixCmd;
-        }
-    }
 
+    /* Produce the score with LilyPond, when it's done open with the PDF viewer */
     plot {
 
         fork {
             this.write;
             0.1.wait;
             (
-                "lilypond -o " ++ this.fileName.standardizePath ++ " " ++
+				this.lilyCmd ++ " -o " ++ this.fileName.standardizePath ++ " " ++
                 this.fileName.standardizePath ++ ".ly"
             ).unixCmd { this.show };
         }
     }
 
 
+    /* Call the text editor to open the .ly file */
     edit {
         this.write;
         (this.textEditor ++ " " ++ this.fileName.standardizePath ++ ".ly").unixCmd;

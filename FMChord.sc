@@ -14,6 +14,8 @@
     a.addChord.plot
     a.diffChord.plot
     a.fmChord.plot
+    a.fmChord.asPitchSeq.plot
+    a.fmChord.asPitchSeq.playMidi;
 
 */
 
@@ -33,6 +35,7 @@ FMChord  {
         index = thisIndex;
     }
 
+    /* Chord equivalent to the 'add' frequencies */
     addChord {
         var addChordCps;
         addChordCps = index.collect {|i|
@@ -41,7 +44,7 @@ FMChord  {
         ^LilyChord.new(addChordCps.cpsmidi - 60);
     }
 
-
+    /* Chord equivalent to the 'difference' frequencies */
     diffChord {
         var diffChordCps;
         diffChordCps = index.collect {|i|
@@ -50,6 +53,7 @@ FMChord  {
         ^LilyChord.new(diffChordCps.cpsmidi - 60);
     }
 
+    /* Chord equivalent to all frequencies */
     fmChord {
 
         ^LilyChord.new(

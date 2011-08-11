@@ -75,7 +75,7 @@ LilyChordSeq : LilyShowableObj {
 
 
 	string {
-	
+		
 		var stringOutput = "";
 		
 		this.chordArray.do { |i|

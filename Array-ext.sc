@@ -1,17 +1,16 @@
 + Array {
 
 /*
+ * method  for substitution of a
+ * Number with a Structure
+ * inside a Structure:
  *
-        method  for substitution of a
-        Number with a Structure
-        inside a Structure:
-
-        a = [3, 2, 1, 2, 1]
-        a.subst(3, [2, 1, 2]) // ==> [ 3, 2, 1, [ 2, [ 2, 1, 2 ] ], 1 ]
-
-        This actually is a subdivision of a element in our score representation
-
-    */
+ * a = [3, 2, 1, 2, 1]
+ * a.subst(3, [2, 1, 2]) // ==> [ 3, 2, 1, [ 2, [ 2, 1, 2 ] ], 1 ]
+ *
+ * This actually is a subdivision of a element in our score representation
+ *
+ */
 
     subst { arg index, thisStruct;
 
