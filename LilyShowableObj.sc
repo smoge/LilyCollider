@@ -1,13 +1,13 @@
 
 LilyShowableObj : LilyObj {
 
-    var <>fileName =        "~/.scly/sketch";
-    var <>pdfViewer =       "xpdf -remote sclyserver";  // "okular --unique"
-    var <>midiPlayer =      "kmid";
-    var <>textEditor =      "emacsclient"; /* "frescobaldi"; */
-    var <>templatesFolder = "~/.scly/templates";
-    var <>template =        "doc";
-	var <>lilyCmd=          "lilypond -dpreview ";
+    var <>fileName = "~/.scly/sketch"; 
+	var <>pdfViewer = "xpdf -remote sclyserver"; /* "okular --unique" */
+	var <>midiPlayer = "kmid"; 
+	var <>textEditor = "emacsclient"; /* "frescobaldi"; */ 
+	var <>templatesFolder = Platform.userExtensionDir ++ "/LilyCollider"; 
+    var <>template = "doc"; 
+	var <>lilyCmd= "lilypond -dpreview ";
 
 
     *new {
