@@ -5,7 +5,7 @@ LilyShowableObj : LilyObj {
 	var <>pdfViewer = "xpdf -remote sclyserver"; /* "okular --unique" */
 	var <>midiPlayer = "kmid"; 
 	var <>textEditor = "emacsclient"; /* "frescobaldi"; */ 
-	var <>templatesFolder = Platform.userExtensionDir ++ "/LilyCollider"; 
+	var <>templatesFolder = "~/share/SuperCollider/Extensions/LilyCollider"; 
     var <>template = "doc"; 
 	var <>lilyCmd= "lilypond -dpreview ";
 
