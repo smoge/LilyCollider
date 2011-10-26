@@ -3,8 +3,11 @@ LilyObj {
 
     classvar <pitchList, <octaveList, <pitchDict, <octDict;
     classvar <afterNoteDict, <beforeNoteDict;
-    
+    classvar <>templatesFolder;
+	
     *initClass {
+
+		templatesFolder = Platform.userExtensionDir ++ "/LilyCollider/templates";   
 
         pitchList = [ "c", "cis", "d", "dis", "e", "f", "fis", "g",
             "gis","a", "ais", "b" ];
