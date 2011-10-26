@@ -7,11 +7,17 @@ LilyShowableObj : LilyObj {
 	var <>textEditor = "frescobaldi"; 
 	var <>template = "doc"; 
 	var <>lilyCmd= "lilypond";
+	var <>templatesFolder;
+
 
     *new {
-        ^super.new;
+        ^super.new.initShowableObj;
     }
 
+	initShowableObj {
+		templatesFolder = Platform.userExtensionDir ++ "/LilyCollider/templates";   
+
+	}
 
     /* Music expression between curly brackets */
     musicString {

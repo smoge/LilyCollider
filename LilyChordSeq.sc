@@ -30,8 +30,6 @@ LilyChordSeq : LilyShowableObj {
 
     put { arg putThis;
 
-		//        if(this.includes(putThis).not) {
-		
 		if(putThis.isKindOf(LilyChord)) {
 			chordArray = chordArray.add(putThis)
 		};
@@ -39,16 +37,22 @@ LilyChordSeq : LilyShowableObj {
 		if(putThis.isKindOf(Array)) {
 			this.putArray(putThis)
 		};
-		//};
+
     }
 
 
     putArray { arg putThis;
 
         putThis.do { |i|
+
             if(i.isKindOf(LilyChord)) {
                 this.put(i)
             };
+			
+			if(i.isKindOf(Array)) {
+				this.put(LilyChord(i))
+			};
+
 
         }
 

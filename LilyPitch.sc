@@ -35,7 +35,7 @@ LilyPitch : LilyShowableObj {
         ((notenumber - notenumberFloor).round(0.5) == (0.5)).if({
             pitch = pitch ++ "ih"
         });
-
+		
         octIndex = ((notenumber+60)/12).floor;
         octave = octaveList.at(octIndex);
     }
