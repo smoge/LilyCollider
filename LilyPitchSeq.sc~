@@ -149,7 +149,7 @@ LilyPitchSeq : LilyShowableObj {
     }
 
 
-    staffString { ^( "\\new PianoStaff {\n \\autochange {\n" ++ this.string ++ "\n}}" ) }
+    staffString { ^( "\\new PianoStaff {\n" ++ this.string ++ "\n}" ) }
 
 
     /* The resulting LilyPond code */

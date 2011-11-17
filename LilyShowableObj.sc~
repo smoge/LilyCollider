@@ -83,8 +83,8 @@ LilyShowableObj : LilyObj {
             this.write;
             0.1.wait;
             (
-		this.lilyCmd ++ " -o " ++ this.fileName.standardizePath ++ " " ++
-		this.fileName.standardizePath ++ ".ly"
+				this.lilyCmd ++ " -o " ++ this.fileName.standardizePath ++ " " ++
+                this.fileName.standardizePath ++ ".ly"
             ).unixCmd { this.show };
         }
     }

@@ -46,7 +46,7 @@
   \context {
     \Voice
     %\remove "Pitch_squash_engraver"
-    %\remove "Stem_engraver"
+    \remove "Stem_engraver"
   }
 
 }

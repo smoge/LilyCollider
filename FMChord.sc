@@ -23,6 +23,7 @@
 FMChord  {
 
     var <>car, <>mod, <>index;
+	var <>thisRound = 0.5;
 
     *new {|car, mod, index|
         ^super.new.init(car, mod, index);
@@ -35,23 +36,41 @@ FMChord  {
         index = thisIndex;
     }
 
-    /* Chord equivalent to the 'add' frequencies */
-    addChord {
-        var addChordCps;
-        addChordCps = index.collect {|i|
+	addFreqs {
+        ^index.collect {|i|
             (car+60).midicps + ((i+1) * (mod+60).midicps);
         };
-        ^LilyChord.new(addChordCps.cpsmidi - 60);
+
+	}
+
+
+	addMidi {
+		^this.addFreqs.cpsmidi.round(thisRound)
+	}
+
+
+    addChord {
+        ^LilyChord(this.addMidi - 60);
     }
 
-    /* Chord equivalent to the 'difference' frequencies */
-    diffChord {
-        var diffChordCps;
-        diffChordCps = index.collect {|i|
+
+	diffFreqs {
+		^index.collect {|i|
             (car+60).midicps - ((i+1) * (mod+60).midicps);
         };
-        ^LilyChord.new(diffChordCps.cpsmidi - 60);
+	}
+
+
+	diffMidi {
+		^this.diffFreqs.cpsmidi.round(thisRound)
+
+	}
+
+
+    diffChord {
+        ^LilyChord(this.diffMidi - 60);
     }
+
 
     /* Chord equivalent to all frequencies */
     fmChord {
