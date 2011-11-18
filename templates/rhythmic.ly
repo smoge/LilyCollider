@@ -22,7 +22,7 @@
     \Score
 
     % proportional notation
-    proportionalNotationDuration = #(ly:make-moment 1 64)
+    proportionalNotationDuration = #(ly:make-moment 1 54)
     %proportionalNotationDuration = #(ly:make-moment 1 74)
     %\override SpacingSpanner #'strict-note-spacing = ##t
     %\override SpacingSpanner #'strict-grace-spacing = ##t
@@ -34,7 +34,7 @@
     \override TextSpanner #'breakable = ##t
 
     % collisions
-    \override NoteColumn #'ignore-collision = ##t
+    %\override NoteColumn #'ignore-collision = ##t
 
     % tuplet handling
     tupletFullLength = ##t
@@ -67,12 +67,12 @@
   \context{
     \Voice
     % allow line break in spanning durations.
-    \remove "Forbid_line_break_engraver"
+    % \remove "Forbid_line_break_engraver"
   }
 }
 
-#(set-default-paper-size "a4" 'landscape)
-#(set-global-staff-size 13)
+#(set-default-paper-size "letter")
+#(set-global-staff-size 12)
 
 
 

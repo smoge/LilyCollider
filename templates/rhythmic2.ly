@@ -73,7 +73,7 @@
   }
 }
 
-#(set-default-paper-size "a4" 'landscape)
+#(set-default-paper-size "letter" 'landscape)
 #(set-global-staff-size 14)
 
 

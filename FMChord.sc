@@ -37,10 +37,15 @@ FMChord  {
     }
 
 	addFreqs {
-        ^index.collect {|i|
-            (car+60).midicps + ((i+1) * (mod+60).midicps);
-        };
+		var carFreq, modFreq, out;
+		carFreq = (car+60).midicps;
+		modFreq = (mod+60).midicps;
+		out = [carFreq, modFreq];
 
+        index.do {|i|
+            out = out ++ ((car+60).midicps + (i * (mod+60).midicps));
+        };
+		^out
 	}
 
 
@@ -50,14 +55,20 @@ FMChord  {
 
 
     addChord {
-        ^LilyChord(this.addMidi - 60);
+        ^LilyChord(this.addMidi.wrap(35,100) - 60);
     }
 
 
 	diffFreqs {
-		^index.collect {|i|
-            (car+60).midicps - ((i+1) * (mod+60).midicps);
+		var carFreq, modFreq, out;
+		carFreq = (car+60).midicps;
+		modFreq = (mod+60).midicps;
+		out = [carFreq, modFreq];
+
+		index.do {|i|
+            out = out ++ ((car+60).midicps - (i * (mod+60).midicps));
         };
+		^out
 	}
 
 
@@ -68,7 +79,7 @@ FMChord  {
 
 
     diffChord {
-        ^LilyChord(this.diffMidi - 60);
+        ^LilyChord(this.diffMidi.wrap0(35,100) - 60);
     }
 
 

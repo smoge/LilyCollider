@@ -17,7 +17,7 @@
     indent = #0
    ragged-right = ##t
 
-    \context { \Score
+    \context { \Score0
         % tuplet handling
         tupletFullLength = ##t
         \override TupletBracket #'bracket-visibility = ##t
@@ -36,6 +36,6 @@
 }
 
 
-#(set-default-paper-size "a4" 'landscape)
+#(set-default-paper-size "letter")
 #(set-global-staff-size 16)
 

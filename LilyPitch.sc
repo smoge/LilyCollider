@@ -42,8 +42,12 @@ LilyPitch : LilyShowableObj {
 
 
     string {
-
-        ^(pitch ++ octave);
+		var thisOut = pitch ++ octave;
+		if(thisOut.isNil) {
+			^""
+		}{
+			^thisOut; 
+		};
     }
 
 

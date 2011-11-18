@@ -110,6 +110,14 @@ LilyPitchSeq : LilyShowableObj {
 	// =====================================================================
 
 
+	chooseOne { ^LilyPitchSeq(this.choose)}
+
+	chooseN { arg n;  
+		var srb;
+		srb = this.eventArray.scramble;
+		eventArray = (0..n).collect({|i| srb[i] })	
+	}
+
     perfectShuffle { eventArray = eventArray.perfectShuffle }
 
 	swap     { arg i,j; eventArray = eventArray.swap(i,j) }

@@ -12,8 +12,8 @@
 }
 
 
-#(set-default-paper-size "a4")
-#(set-global-staff-size 18)
+#(set-default-paper-size "letter")
+#(set-global-staff-size 14)
 
 \midi { }
 

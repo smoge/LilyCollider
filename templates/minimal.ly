@@ -13,8 +13,8 @@
    tagline = ""
 }
 
-#(set-default-paper-size "a4" 'landscape)
-#(set-global-staff-size 16)
+#(set-default-paper-size "letter" 'landscape)
+#(set-global-staff-size 14)
 
 \midi {}
 
