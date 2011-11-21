@@ -137,7 +137,7 @@ LilyPitch : LilyShowableObj {
         });
 
         // returns a PitchSequence:
-        //^PitchSequence(outputArray.cpsmidi.round(roundNotes) - 60)
+        ^LilyChord(outputArray.cpsmidi.round(roundNotes) - 60)
     }
 
 }
