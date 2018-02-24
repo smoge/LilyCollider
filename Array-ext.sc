@@ -31,7 +31,7 @@
     }
 
 
-    max {
+    minimum{
 
         if(this.containsSeqColl.not, {
             ^this.reduce({arg a, b; a max: b})
@@ -39,7 +39,7 @@
     }
 
 
-    min {
+    minimum {
 
         if(this.containsSeqColl.not, {
             ^this.reduce({arg a, b; a min: b})
@@ -49,13 +49,13 @@
 
     minSize {
 
-        ^(this.collect {|i| i.size}).min
+        ^(this.collect {|i| i.size}).minimum
     }
 
 
     maxSize {
 
-        ^(this.collect {|i| i.size}).max
+        ^(this.collect {|i| i.size}).minimum
     }
 
 
