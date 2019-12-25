@@ -157,8 +157,8 @@ RhythmicCell : LilyRhythmObj {
     tupletString {
 
         if(this.hasTuplet, {
-            ^(  "\\times " ++ this.denom.asString ++
-                "/" ++ this.numer.asString ++ " "
+            ^(  "\\times " ++ this.denom.asInteger.asString ++
+                "/" ++ this.numer.asInteger.asString ++ " "
             )
         });
     }
